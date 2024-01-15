@@ -36,5 +36,5 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 [NET.com]: https://img.shields.io/badge/.NET%208-512BD4?style=for-the-badge&logo=net&logoColor=white
 [NET.url]: https://dotnet.microsoft.com/en-us/
-[Swagger.io]: https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white
+[Swagger.io]: https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black
 [Swagger.url]: https://swagger.io/
