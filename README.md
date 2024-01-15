@@ -1,9 +1,4 @@
 <h3 align="center">NinjAPI</h3>
-
-  <p align="center">
-    <a href="https://github.com/BrocxITServices/NinjAPI"><strong>Explore the docs »</strong></a>
-    <br />
-  </p>
 </div>
 
 
