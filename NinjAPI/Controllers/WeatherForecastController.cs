@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace NinjAPI.Controllers
 {
@@ -28,6 +29,12 @@ namespace NinjAPI.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost(Name = "PostDikke")]
+        public async Task PostDikke()
+        {
+            await Task.FromResult(0);
         }
     }
 }
