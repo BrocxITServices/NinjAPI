@@ -12,8 +12,8 @@ using NinjAPI.Data;
 namespace NinjAPI.Migrations
 {
     [DbContext(typeof(GymContext))]
-    [Migration("20240118101301_Test_Daniv2")]
-    partial class Test_Daniv2
+    [Migration("20240118123904_ManyToOnev2")]
+    partial class ManyToOnev2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,12 +27,12 @@ namespace NinjAPI.Migrations
 
             modelBuilder.Entity("NinjAPI.Models.Ninja", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("NinjaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<DateOnly?>("DateOfBirth")
+                    b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
                     b.Property<string>("Name")
@@ -46,43 +46,47 @@ namespace NinjAPI.Migrations
                     b.Property<int>("Specialization")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TrainingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TrainingId");
+                    b.HasKey("NinjaId");
 
                     b.ToTable("Ninjas");
                 });
 
             modelBuilder.Entity("NinjAPI.Models.Training", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("TrainingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("NinjaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Title")
+                        .HasColumnType("int");
 
                     b.Property<string>("Trainer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("TrainingId");
+
+                    b.HasIndex("NinjaId");
 
                     b.ToTable("Trainings");
                 });
 
+            modelBuilder.Entity("NinjAPI.Models.Training", b =>
+                {
+                    b.HasOne("NinjAPI.Models.Ninja", "Ninja")
+                        .WithMany("Trainings")
+                        .HasForeignKey("NinjaId");
+
+                    b.Navigation("Ninja");
+                });
+
             modelBuilder.Entity("NinjAPI.Models.Ninja", b =>
                 {
-                    b.HasOne("NinjAPI.Models.Training", "Training")
-                        .WithMany()
-                        .HasForeignKey("TrainingId");
-
-                    b.Navigation("Training");
+                    b.Navigation("Trainings");
                 });
 #pragma warning restore 612, 618
         }

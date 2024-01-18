@@ -4,14 +4,15 @@ namespace NinjAPI.Models
 {
     public class Ninja
     {
-        public Guid Id { get; set; }
+        public Guid NinjaId { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }
-        public DateOnly? DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
         public NinjaSpecialization Specialization { get; set; }
-        public Training? Training { get; set; }
-    }
 
+        //Navigation property | Each Ninja has access to multiple trainings
+        public ICollection<Training>? Trainings { get; set; }
+    }
     public enum NinjaSpecialization
     {
         None = 0,

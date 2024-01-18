@@ -12,8 +12,8 @@ namespace NinjAPI.Data
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
-            mb.Entity<Ninja>().Property(c => c.Id).HasDefaultValueSql("NEWID()");
-            mb.Entity<Training>().Property(c => c.Id).HasDefaultValueSql("NEWID()");
+            mb.Entity<Ninja>().Property(c => c.NinjaId).HasDefaultValueSql("NEWID()");
+            mb.Entity<Training>().Property(c => c.TrainingId).HasDefaultValueSql("NEWID()");
         }
     }
 }
