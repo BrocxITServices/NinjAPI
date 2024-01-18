@@ -20,6 +20,7 @@ namespace NinjAPI.Controllers
         {
             _context = context;
         }
+
         [HttpGet(Name = "GetNinja")]
         // GET: Ninjas
         public IActionResult Index()
@@ -28,18 +29,22 @@ namespace NinjAPI.Controllers
         }
 
         //TODO create new ninja 
-        [HttpPost(Name = "NinjaCreate")]
-        public IActionResult Post()
+        [HttpPost(Name = "AddNinja")]
+        public IActionResult Post(string inputStringValue)
         {
-            var ninja = new Ninja();
-            ninja.Name = "Jeffrey";
-            ninja.DateOfBirth = new DateOnly(2000, 2, 12);
-            ninja.Specialization = 0;
-            ninja.Role = "Trainer";
-            _context.Ninjas.Add(ninja);
-            _context.SaveChanges();
+            var inputValue = inputStringValue;
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+
+            //var ninja = new Ninja();
+            //ninja.Name = "Henkie";
+            //ninja.DateOfBirth = new DateOnly(2000, 2, 12);
+            //ninja.Specialization = 0;
+            //ninja.Role = "Trainer";
+            //_context.Ninjas.Add(ninja);
+            //_context.SaveChanges();
             return Ok();
         }
-
     }
 }
