@@ -2,18 +2,21 @@
 
 namespace NinjAPI.Models
 {
-    public class Ninja : BaseEntity
+    public class Ninja
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Role { get; set; }
         public DateOnly? DateOfBirth { get; set; }
         public NinjaSpecialization Specialization { get; set; }
-        [ForeignKey(nameof(Training))]
-        public List<Training> Trainings { get; set; }
+        public Training? Training { get; set; }
     }
 
     public enum NinjaSpecialization
     {
         None = 0,
-        SwordFighting = 1
+        SwordFighting = 1,
+        Stealth = 2,
+        ShurikenThrowing = 3
     }
 }

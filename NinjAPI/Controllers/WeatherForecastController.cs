@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using NinjAPI.Models;
 
 namespace NinjAPI.Controllers
 {
@@ -30,11 +32,17 @@ namespace NinjAPI.Controllers
             })
             .ToArray();
         }
-
-        [HttpPost(Name = "PostDikke")]
-        public async Task PostDikke()
+        [HttpPut(Name = "CreateNinja")]
+        public async Task<IActionResult> CreateNinja()
         {
             await Task.FromResult(0);
+            return Ok("Dit is de body van de CreateNinja 200 response");
+        }
+        [HttpPost(Name = "CreateNinja")]
+        public async Task<IActionResult> Index()
+        {
+
+            return Ok("jer");
         }
     }
 }
