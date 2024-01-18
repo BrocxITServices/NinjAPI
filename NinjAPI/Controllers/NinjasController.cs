@@ -30,13 +30,10 @@ namespace NinjAPI.Controllers
 
         //TODO create new ninja 
         [HttpPost(Name = "AddNinja")]
-        public IActionResult Post(string inputStringValue)
+        public IActionResult Post(Ninja inputNinjaValue)
         {
-            var inputValue = inputStringValue;
-
             if (!ModelState.IsValid) return BadRequest(ModelState);
-
-
+            
             //var ninja = new Ninja();
             //ninja.Name = "Henkie";
             //ninja.DateOfBirth = new DateOnly(2000, 2, 12);
