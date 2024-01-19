@@ -5,11 +5,12 @@ namespace NinjAPI.Models
     public class Ninja
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Role { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+        public DateOnly ? DateOfBirth { get; set; }
+      
         public NinjaSpecialization Specialization { get; set; }
-        public Training? Training { get; set; }
+        public virtual ICollection<NinjaTraining> NinjaTraining { get; set; } = Array.Empty<NinjaTraining>();
     }
 
     public enum NinjaSpecialization

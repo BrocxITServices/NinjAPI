@@ -43,14 +43,31 @@ namespace NinjAPI.Migrations
                     b.Property<int>("Specialization")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TrainingId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Ninjas");
+                });
+
+            modelBuilder.Entity("NinjAPI.Models.NinjaTraining", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<Guid>("NinjaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TrainingId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NinjaId");
+
                     b.HasIndex("TrainingId");
 
-                    b.ToTable("Ninjas");
+                    b.ToTable("NinjaTraining");
                 });
 
             modelBuilder.Entity("NinjAPI.Models.Training", b =>
@@ -73,13 +90,33 @@ namespace NinjAPI.Migrations
                     b.ToTable("Trainings");
                 });
 
-            modelBuilder.Entity("NinjAPI.Models.Ninja", b =>
+            modelBuilder.Entity("NinjAPI.Models.NinjaTraining", b =>
                 {
+                    b.HasOne("NinjAPI.Models.Ninja", "Ninja")
+                        .WithMany("NinjaTraining")
+                        .HasForeignKey("NinjaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("NinjAPI.Models.Training", "Training")
-                        .WithMany()
-                        .HasForeignKey("TrainingId");
+                        .WithMany("NinjaTraining")
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ninja");
 
                     b.Navigation("Training");
+                });
+
+            modelBuilder.Entity("NinjAPI.Models.Ninja", b =>
+                {
+                    b.Navigation("NinjaTraining");
+                });
+
+            modelBuilder.Entity("NinjAPI.Models.Training", b =>
+                {
+                    b.Navigation("NinjaTraining");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,13 +18,26 @@ namespace NinjAPI.Controllers
 
         //TODO create new ninja 
         [HttpPost(Name = "AddNinja")]
-        public IActionResult Post(Ninja inputNinjaValue)
+        public IActionResult Post(Ninja ninja)
         {
+            ninja.NinjaTraining ??= Array.Empty<NinjaTraining>();   
+
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            _dbContext.Ninjas.Add(inputNinjaValue);
-            _dbContext.SaveChanges();
+
+            _context.Ninjas.Add(ninja);
+            _context.SaveChanges();
             return Ok();
         }
+
+        [HttpDelete(Name = "DeleteNinja")]
+
+        public async Task<IActionResult> DeleteById(Guid ninjaId)
+        {
+            if (ninjaId == Guid.Empty) return BadRequest("Id is invalid");
+
+            var ninja = await _context.Ninjas.FindAsync(ninjaId);
+            _context.Ninjas.Remove(ninja);
+            await _context.SaveChangesAsync();
 
         [HttpGet(Name = "GetNinjaById")]
         public async Task<IActionResult> GetById(Guid ninjaId)
