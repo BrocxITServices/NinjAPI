@@ -30,8 +30,10 @@ namespace NinjAPI.Controllers
 
         //TODO create new ninja 
         [HttpPost(Name = "AddNinja")]
-        public IActionResult Post(Ninja? inputNinjaValue)
+        public IActionResult Post(Ninja ninja)
         {
+            ninja.NinjaTraining ??= Array.Empty<NinjaTraining>();   
+
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             //var ninja = new Ninja();
@@ -39,8 +41,20 @@ namespace NinjAPI.Controllers
             //ninja.DateOfBirth = new DateOnly(2000, 2, 12);
             //ninja.Specialization = 0;
             //ninja.Role = "Trainer";
-            _context.Ninjas.Add(inputNinjaValue);
+            _context.Ninjas.Add(ninja);
             _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete(Name = "DeleteNinja")]
+
+        public async Task<IActionResult> DeleteById(Guid ninjaId)
+        {
+            if (ninjaId == Guid.Empty) return BadRequest("Id is invalid");
+
+            var ninja = await _context.Ninjas.FindAsync(ninjaId);
+            _context.Ninjas.Remove(ninja);
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }
