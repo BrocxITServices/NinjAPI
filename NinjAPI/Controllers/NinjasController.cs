@@ -24,8 +24,8 @@ namespace NinjAPI.Controllers
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            _context.Ninjas.Add(ninja);
-            _context.SaveChanges();
+            _dbContext.Ninjas.Add(ninja);
+            _dbContext.SaveChanges();
             return Ok();
         }
 
@@ -35,9 +35,11 @@ namespace NinjAPI.Controllers
         {
             if (ninjaId == Guid.Empty) return BadRequest("Id is invalid");
 
-            var ninja = await _context.Ninjas.FindAsync(ninjaId);
-            _context.Ninjas.Remove(ninja);
-            await _context.SaveChangesAsync();
+            var ninja = await _dbContext.Ninjas.FindAsync(ninjaId);
+            _dbContext.Ninjas.Remove(ninja);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
 
         [HttpGet(Name = "GetNinjaById")]
         public async Task<IActionResult> GetById(Guid ninjaId)
@@ -49,7 +51,7 @@ namespace NinjAPI.Controllers
         }
 
         [HttpPut(Name = "UpdateNinja")]
-        public async Task<IActionResult> PutNinja(Ninja ninja)
+        public async Task<IActionResult> PutNinja(Ninja? ninja)
         {
             if (ninja.Id == Guid.Empty) return BadRequest("Id is invalid");
 
