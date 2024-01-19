@@ -7,7 +7,7 @@ namespace NinjAPI.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }
-        public DateOnly? DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public NinjaSpecialization Specialization { get; set; }
         public Training? Training { get; set; }
     }
