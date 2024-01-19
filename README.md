@@ -27,15 +27,14 @@ This project is designed for the operations of a gym by providing a management s
 * [![.NET][NET.com]][NET.url]
 * [![.NET][Swagger.io]][Swagger.url]
 
-Documentatie NinjAPI
+### Documentatie NinjAPI
 - Let op de database relatie (Many to Many)
 - Let op de HTTP Request methods
 
 1. Start het project.
 2. Open je localhost
-
-Klik op bijv 'POST' 
-Klik daarna op 'Try it out'
+3. Klik op bijv 'POST' 
+4. Klik daarna op 'Try it out'
 
 In de request body kan je de gegevens van een Ninja toevoegen zodra je dit hebt gedaan.
 Zodra je alle gegevens hebt ingevuld klik je op 'Execute' hierna word je data in het database gezet.
