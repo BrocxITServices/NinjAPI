@@ -3,4 +3,3 @@
 GET {{NinjAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
