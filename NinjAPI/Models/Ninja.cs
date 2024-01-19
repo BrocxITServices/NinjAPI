@@ -10,6 +10,7 @@ namespace NinjAPI.Models
         public DateOnly? DateOfBirth { get; set; }
         public NinjaSpecialization Specialization { get; set; }
         public Training? Training { get; set; }
+        public IList<NinjaTraining> NinjaTraining { get; set; }
     }
 
     public enum NinjaSpecialization
